@@ -1,4 +1,4 @@
-##Intro to comands 
+# Intro to comands 
 ```
 hacker@hello~intro-to-commands:~$ whoami
 hacker
@@ -8,7 +8,7 @@ pwn.college{MBzvcCNHavnBt4QFFi9LJMCe5v-.QX3YjM1wiN2QDN3EzW}
 hacker@hello~intro-to-commands:~$ 
 ```
 
-##Intro to Arguments 
+ # Intro to Arguments 
 using of echo for display 
 
 ```
@@ -18,5 +18,5 @@ pwn.college{AKdYNY9iGFkojs7vqCTyz3XGIj3.QX4YjM1wiN2QDN3EzW}
 hacker@hello~intro-to-arguments:~$ 
 ```
 
-##comand history 
+# comand history 
 just enter any random flag 
