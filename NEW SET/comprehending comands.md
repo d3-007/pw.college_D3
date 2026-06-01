@@ -226,3 +226,54 @@ The next clue is **hidden** --- its filename starts with a '.' character. You'll
 oYLfjFxLJLSMeVqIYVK3eCs2H1m.QX5IDO0wiN2QDN3EzW
 
 ```
+# making directories 
+mkdir is used to make new directoied mkdir can handel an absolute path directly 
+to create a new file within the directlry 
+
+use touch path/file_name
+```
+hacker@commands~making-directories:~$ mkdir /tmp/pwn
+hacker@commands~making-directories:~$ ls 
+a  h  tmp
+hacker@commands~making-directories:~$ cd tmp
+hacker@commands~making-directories:~/tmp$ mkdir pwn
+mkdir: cannot create directory ‘pwn’: File exists
+hacker@commands~making-directories:~/tmp$ ls
+pwn
+hacker@commands~making-directories:~/tmp$ cd /pwn
+bash: cd: /pwn: No such file or directory
+hacker@commands~making-directories:~/tmp$ /challenge/run
+Uh oh! /tmp/pwn/college does not exist. Please use the 'touch' command to 
+create it!
+hacker@commands~making-directories:~/tmp$ touch college
+hacker@commands~making-directories:~/tmp$ /challenge/run
+Uh oh! /tmp/pwn/college does not exist. Please use the 'touch' command to 
+create it!
+hacker@commands~making-directories:~/tmp$ touch /tmp/pwn/college
+hacker@commands~making-directories:~/tmp$ /challenge/run
+Success! Here is your flag:
+pwn.college{Yn46r1JYjSOHt-jkYLMMiqbTqWI.QXxMDO0wiN2QDN3EzW}
+
+```
+# findinf files 
+how to use files 
+file can be used with absolute path 
+and if the path is unknow use [find / -name "keyword"]
+
+# linking files 
+simlink ln -s 
+hard link ln 
+file it tells u the character of the content in the file and slo shows if its hard/soft link
+
+a soft link does not override the existing file hece we had to delte the old file coopy the contents into the delted file and then run challenge/catflg as it is designed to pit to the delteed file at defualt 
+
+```
+hacker@commands~linking-files:~$ ln -s /flag /home/hacker/not-the-flag
+ln: failed to create symbolic link '/home/hacker/not-the-flag': File exists
+hacker@commands~linking-files:~$ rm /home/hacker/not-the-flag
+hacker@commands~linking-files:~$ ln -s /flag /home/hacker/not-the-flag
+hacker@commands~linking-files:~$ /challenge/catflag
+About to read out the /home/hacker/not-the-flag file!
+pwn.college{4R81KbhJu5HYaDgHL3N6QoYcYDw.QX5ETN1wiN2QDN3EzW}
+hacker@commands~linking-files:~$
+```
