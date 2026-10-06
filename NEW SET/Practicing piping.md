@@ -170,4 +170,52 @@ pwFAKEFLAGnFAKEFLAG.FAKEFLAGcFAKEFLAGoFAKEFLAGlFAKEFLAGlFAKEFLAGeFAKEFLAGgFAKEFL
 pwn.college{Ulp_rBabkkuCUYZBVDDTBiwhB1T.01NxQTMywiN2QDN3EzW}ha
 
 ```
+or 
+essentially what sed does is replace so it cannot be used induvially so use it with piping which was not sone in the previous attempt 
+```
+hacker@piping~filtering-with-sed:~$ /challenge/run | sed "s/FAKEFLAG//g"
+pwn.college{Ulp_rBabkkuCUYZBVDDTBiwhB1T.01NxQTMywiN2QDN3EzW
+```
 
+## DUplicatating piped data with tee
+what tee does it it acts as a middle men sees the output of the previous file and copies it essentially helping to finding the error, so when use tee use abc.txt file to store the value as making a new directory dose not help
+```
+hacker@piping~duplicating-piped-data-with-tee:~$ /challenge/pwn | tee sec | /challenge/college
+Processing...
+/bin/tee: sec: Is a directory
+The input to 'college' does not contain the correct secret code! This code 
+should be provided by the 'pwn' command. HINT: use 'tee' to save the first 
+attempt to a file, inspect the saved output, and then retry the pipeline with 
+what you learned.
+hacker@piping~duplicating-piped-data-with-tee:~$ cat sec
+cat: sec: Is a directory
+hacker@piping~duplicating-piped-data-with-tee:~$ /challenge/pwn
+Processing...
+You must pipe the output of /challenge/pwn into /challenge/college (or 'tee' 
+for debugging).
+hacker@piping~duplicating-piped-data-with-tee:~$ /challenge/college
+/challenge/college needs to be on the receiving end of the output of 
+'/challenge/pwn' (or 'tee' for debugging).
+hacker@piping~duplicating-piped-data-with-tee:~$ /challenge/pwn | tee secret.txt | /challenge/college
+Processing...
+The input to 'college' does not contain the correct secret code! This code 
+should be provided by the 'pwn' command. HINT: use 'tee' to save the first 
+attempt to a file, inspect the saved output, and then retry the pipeline with 
+what you learned.
+hacker@piping~duplicating-piped-data-with-tee:~$ cat secret.txt
+Usage: /challenge/pwn --secret [SECRET_ARG]
+
+SECRET_ARG should be "4ERG99e1"
+hacker@piping~duplicating-piped-data-with-tee:~$ /challenge/pwn --secret [4ERG99e1] | /challenge/college
+Processing...
+The input to 'college' does not contain the correct secret code! This code 
+should be provided by the 'pwn' command. HINT: use 'tee' to save the first 
+attempt to a file, inspect the saved output, and then retry the pipeline with 
+what you learned.
+hacker@piping~duplicating-piped-data-with-tee:~$ /challenge/pwn --secret 4ERG99e1 | /challenge/college
+Processing...
+Correct! Passing secret value to /challenge/college...
+Great job! Here is your flag:
+pwn.college{4ERG99e1JuCmeBixkbLq5uHlXw-.QXxITO0wiN2QDN3EzW}
+hacker@piping~duplicating-piped-data-with-tee:~$
+```
